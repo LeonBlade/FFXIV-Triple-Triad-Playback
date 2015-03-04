@@ -5,6 +5,10 @@ vertical-align()
 	-ms-transform translateY(-50%)
 	transform translateY(-50%)
 
+filter(args)
+	filter args
+	-webkit-filter args
+
 body
 	background-color #555
 	padding 20px
@@ -40,7 +44,6 @@ card
 	&.dragging
 		.card
 			filter drop-shadow(0 10px 10px #000)
-			-webkit-filter drop-shadow(0 10px 10px #000)
 
 .cardThumb
 	position relative

@@ -41,7 +41,7 @@ card.dragging .card {
   height: 40px;
   margin: 5px;
 }
-div.cardThumb div.effects {
+.cardThumb div.effects {
   position: absolute;
   width: 100%;
   height: 100%;
