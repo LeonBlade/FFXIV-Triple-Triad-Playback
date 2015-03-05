@@ -1,19 +1,31 @@
+*[draggable=true] img {
+  pointer-events: none;
+}
 body {
   background-color: #555;
   padding: 20px;
   color: #fff;
 }
-board row {
-  display: block;
+body board {
+  width: 450px;
+  height: 450px;
+  display: flex;
+  flex-flow: row wrap;
 }
-deck space {
+body board space {
+  display: flex;
+  background: #fff;
+  width: 140px;
+  height: 140px;
+  margin: 5px;
+}
+body deck space {
   position: relative;
   width: 104px;
   height: 128px;
   display: inline-block;
-  clear: both;
 }
-deck space::after {
+body deck space::after {
   content: "";
   background: url("/images/back/default.png");
   opacity: 0.5;

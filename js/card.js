@@ -1,28 +1,40 @@
 (function () {
 
-	var card = angular.module('card', ['ui.bootstrap', 'ngDraggable']);
+	var card = angular.module('card', ['ui.bootstrap']);
 
 	card.directive('card', ['$interval', function ($interval) {
 		return {
 			restrict: 'E',
 			templateUrl: function (elem, attr) { return (attr.thumb)?'template/card_t.html':'template/card.html' },
-			scope: { id: '@', color: '@' },
+			scope: { which: '@', color: '@' },
 			controller: ['$http', '$scope', function ($http, $scope) {
-				var _card = this;
+				// create instance of controller for the template instance
+				var ctrl = this;
+
+				$scope.$watch(function () { return $scope.color }, function (newValue, oldValue) {
+					ctrl.color = newValue;
+				});
+
+				// transfer the data into the card object to the controller to be used in the template
 				$http.get('data/cards.json').success(function (data) {
-					data = data[$scope.id - 1];
-					_card.color = ($scope.color)?$scope.color:'default';
-					_card.id = ("000" + data.number).slice(-3);
-					_card.tooltip = data.name;
-					_card.type = (data.type > 0)?data.type:undefined;
-					_card.rarity = data.rarity;
-					_card.top = data.topValue;
-					_card.right = data.rightValue;
-					_card.bottom = data.bottomValue;
-					_card.left = data.leftValue;
+					// reset the data
+					data = data[$scope.which - 1];
+					ctrl.color = ($scope.color) ? $scope.color : 'default';
+					ctrl.id = ("000" + data.number).slice(-3);
+					ctrl.tooltip = data.name;
+					ctrl.type = (data.type > 0)?data.type:undefined;
+					ctrl.rarity = data.rarity;
+					ctrl.top = data.topValue;
+					ctrl.right = data.rightValue;
+					ctrl.bottom = data.bottomValue;
+					ctrl.left = data.leftValue;
 				});
 			}],
 			link: function (scope, elem, attr) {
+				// create a card id for the element and set a proper id for reference ine the DOM
+				elem.attr('id', "card-" + attr['which']);
+
+				// if this is a card thumbnail
 				if (attr.thumb) {
 					scope.card.hoverCycle = 1;
 					var interval;

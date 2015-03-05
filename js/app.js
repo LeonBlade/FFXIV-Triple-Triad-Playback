@@ -1,6 +1,6 @@
 (function () {
 
-	var app = angular.module('app', ['card', 'deck']);
+	var app = angular.module('app', ['card', 'deck', 'nsDrag']);
 
 	app.controller('AppController', ['$scope', function ($scope) {
 
