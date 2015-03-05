@@ -2,23 +2,24 @@
 
 	var card = angular.module('card', ['ui.bootstrap']);
 
-	card.directive('card', ['$interval', function ($interval) {
+	card.directive('card', function () {
 		return {
 			restrict: 'E',
-			templateUrl: function (elem, attr) { return (attr.thumb)?'template/card_t.html':'template/card.html' },
+			templateUrl: function (elem, attr) { return (attr.thumb) ? 'template/card_t.html' : 'template/card.html' },
 			scope: { which: '@', color: '@' },
 			controller: ['$http', '$scope', function ($http, $scope) {
 				// create instance of controller for the template instance
 				var ctrl = this;
 
-				$scope.$watch(function () { return $scope.color }, function (newValue, oldValue) {
-					ctrl.color = newValue;
-				});
+				$scope.changeColor = function (color) {
+					$scope.$apply(function () {
+						$scope.color = color;
+					});
+				};
 
 				// transfer the data into the card object to the controller to be used in the template
-				$http.get('data/cards.json').success(function (data) {
+				$http.get('card.php?id='+$scope.which).success(function (data) {
 					// reset the data
-					data = data[$scope.which - 1];
 					ctrl.color = ($scope.color) ? $scope.color : 'default';
 					ctrl.id = ("000" + data.number).slice(-3);
 					ctrl.tooltip = data.name;
