@@ -31,33 +31,12 @@
 					ctrl.left = data.leftValue;
 				});
 			}],
-			link: function (scope, elem, attr) {
-				// create a card id for the element and set a proper id for reference ine the DOM
-				elem.attr('id', "card-" + attr['which']);
-
-				// if this is a card thumbnail
-				if (attr.thumb) {
-					scope.card.hoverCycle = 1;
-					var interval;
-					elem.on('mouseenter', function (e) {
-						scope.card.hoverCycle = 1;
-						interval = $interval(function () {
-							if (scope.card.hoverCycle == 3)
-								scope.card.hoverCycle = 1;
-							else
-								scope.card.hoverCycle++;
-
-						}, 2000);
-					});
-					elem.on('mouseleave', function (e) {
-						scope.card.hoverCycle = 1;
-						$interval.cancel(interval);
-						interval = undefined;
-					});
-				}
+			link: function (scope, elem, attrs) {
+				// create a card id for the element and set a proper id for reference in the DOM
+				elem.attr('id', "card-" + attrs['which']);
 			},
 			controllerAs: "card",
 		};
-	}]);
+	});
 
 })();

@@ -16,7 +16,13 @@
 
 	<body ng-controller="AppController">
 
+		<card which="75" thumb="true"></card>
+
 		<deck cards="36,37,14,27,35" color="blue"></deck>
+
+		<board>
+			<space ng-drop ng-repeat="n in range(1, 9)"></space>
+		</board>
 
 	</body>
 

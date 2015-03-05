@@ -4,7 +4,6 @@
 body {
   background-color: #555;
   padding: 20px;
-  color: #fff;
 }
 body board {
   width: 450px;
@@ -36,24 +35,19 @@ body deck space::after {
   position: absolute;
   z-index: -1;
 }
-card {
-  display: inline-block;
-  float: left;
+body card {
+  margin: auto;
   width: 104px;
   height: 128px;
 }
-card.dragging .card {
-  filter: drop-shadow(0 10px 10px #000);
-  -webkit-filter: drop-shadow(0 10px 10px #000);
-}
-.cardThumb {
+body card .cardThumb {
   position: relative;
   display: inline-block;
   width: 40px;
   height: 40px;
   margin: 5px;
 }
-.cardThumb div.effects {
+body card .cardThumb div.effects {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -64,38 +58,39 @@ card.dragging .card {
   border-top: 1px solid rgba(255,255,255,0.5);
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,0.25)), color-stop(100%, rgba(255,255,255,0)));
 }
-.cardThumb div.hover {
-  display: none;
-  cursor: pointer;
+body card .cardThumb div.hover div.numbers {
+  opacity: 0;
 }
-.cardThumb div.hover img {
+body card .cardThumb div.hover img {
   position: absolute;
 }
-.cardThumb div.hover img.star {
+body card .cardThumb div.hover img.star {
+  opacity: 0;
   top: 7px;
   left: 6px;
 }
-.cardThumb div.hover img.type {
+body card .cardThumb div.hover img.type {
+  opacity: 0;
   top: 10px;
   right: 10px;
 }
-.cardThumb div.hover img.card-top {
+body card .cardThumb div.hover img.card-top {
   top: 0;
   left: 13px;
 }
-.cardThumb div.hover img.card-bottom {
+body card .cardThumb div.hover img.card-bottom {
   bottom: 0;
   left: 13px;
 }
-.cardThumb div.hover img.card-left {
+body card .cardThumb div.hover img.card-left {
   top: 14px;
   left: 0;
 }
-.cardThumb div.hover img.card-right {
+body card .cardThumb div.hover img.card-right {
   top: 14px;
   right: 0;
 }
-.cardThumb:hover div.hover {
+body card .cardThumb:hover div.hover {
   display: block;
   border-radius: 4px;
   background: rgba(0,0,0,0.5);
@@ -105,52 +100,205 @@ card.dragging .card {
   top: 0;
   left: 0;
 }
-.card {
+body card .cardThumb:hover div.hover div.numbers {
+  -webkit-animation: thumbHoverFaces 4.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation: thumbHoverFaces 4.5s;
+  animation-iteration-count: infinite;
+}
+body card .cardThumb:hover div.hover img.star {
+  -webkit-animation: thumbHoverRarity 4.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation: thumbHoverFaces 4.5s;
+  animation-iteration-count: infinite;
+}
+body card .cardThumb:hover div.hover img.type {
+  -webkit-animation: thumbHoverType 4.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation: thumbHoverFaces 4.5s;
+  animation-iteration-count: infinite;
+}
+body card .card {
   position: relative;
   display: inline-block;
   width: 104px;
   height: 128px;
 }
-.card img {
+body card .card img {
   position: absolute;
 }
-.card img.star {
+body card .card img.star {
   top: 6px;
   left: 9px;
 }
-.card img.type {
+body card .card img.type {
   top: 3px;
   right: 4px;
 }
-.card img.card-top {
+body card .card img.card-top {
   bottom: 26px;
   left: 44px;
 }
-.card img.card-left {
+body card .card img.card-left {
   bottom: 19px;
   left: 32px;
 }
-.card img.card-bottom {
+body card .card img.card-bottom {
   bottom: 12px;
   left: 44px;
 }
-.card img.card-right {
+body card .card img.card-right {
   bottom: 19px;
   right: 33px;
 }
-#board {
+body #board {
   display: inline-block;
 }
-#board .row .space {
+body #board .row .space {
   display: inline-block;
   background: #ccc;
   width: 140px;
   height: 140px;
 }
-#board .row .space .card {
+body #board .row .space .card {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+@-moz-keyframes thumbHoverFaces {
+  0%, 33% {
+    opacity: 1;
+  }
+
+  34%, 100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes thumbHoverFaces {
+  0%, 33% {
+    opacity: 1;
+  }
+
+  34%, 100% {
+    opacity: 0;
+  }
+}
+@-o-keyframes thumbHoverFaces {
+  0%, 33% {
+    opacity: 1;
+  }
+
+  34%, 100% {
+    opacity: 0;
+  }
+}
+@-ms-keyframes thumbHoverFaces {
+  0%, 33% {
+    opacity: 1;
+  }
+
+  34%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes thumbHoverFaces {
+  0%, 33% {
+    opacity: 1;
+  }
+
+  34%, 100% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes thumbHoverRarity {
+  0%, 33%, 67%, 100% {
+    opacity: 0;
+  }
+
+  34%, 66% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes thumbHoverRarity {
+  0%, 33%, 67%, 100% {
+    opacity: 0;
+  }
+
+  34%, 66% {
+    opacity: 1;
+  }
+}
+@-o-keyframes thumbHoverRarity {
+  0%, 33%, 67%, 100% {
+    opacity: 0;
+  }
+
+  34%, 66% {
+    opacity: 1;
+  }
+}
+@-ms-keyframes thumbHoverRarity {
+  0%, 33%, 67%, 100% {
+    opacity: 0;
+  }
+
+  34%, 66% {
+    opacity: 1;
+  }
+}
+@keyframes thumbHoverRarity {
+  0%, 33%, 67%, 100% {
+    opacity: 0;
+  }
+
+  34%, 66% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes thumbHoverType {
+  0%, 33%, 66% {
+    opacity: 0;
+  }
+
+  67%, 100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes thumbHoverType {
+  0%, 33%, 66% {
+    opacity: 0;
+  }
+
+  67%, 100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes thumbHoverType {
+  0%, 33%, 66% {
+    opacity: 0;
+  }
+
+  67%, 100% {
+    opacity: 1;
+  }
+}
+@-ms-keyframes thumbHoverType {
+  0%, 33%, 66% {
+    opacity: 0;
+  }
+
+  67%, 100% {
+    opacity: 1;
+  }
+}
+@keyframes thumbHoverType {
+  0%, 33%, 66% {
+    opacity: 0;
+  }
+
+  67%, 100% {
+    opacity: 1;
+  }
 }
