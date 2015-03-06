@@ -7,14 +7,20 @@
 			restrict: 'E',
 			templateUrl: function (elem, attr) { return (attr.thumb) ? 'template/card_t.html' : 'template/card.html' },
 			scope: { which: '@', color: '@' },
-			controller: ['$http', '$scope', function ($http, $scope) {
+			controller: ['$http', '$scope', '$interval', function ($http, $scope, $interval) {
 				// create instance of controller for the template instance
 				var ctrl = this;
 
 				$scope.changeColor = function (color) {
-					$scope.$apply(function () {
-						$scope.color = color;
-					});
+					// if we didn't pass in a specific value then just get the current from scope and swap it
+					if (color == undefined) 
+						color = ($scope.color == "blue") ? "red" : "blue";
+					// set the new color in the scope
+					$scope.color = color;
+					// set this element's color attribute to the new color
+					$('#card-'+this.$parent.$id).attr('color', color);
+					// return the new color
+					return color;
 				};
 
 				$scope.changeCard = function (id) {
@@ -30,7 +36,34 @@
 						ctrl.bottom = data.bottomValue;
 						ctrl.left = data.leftValue;
 					});
-				}
+				};
+
+				// flip card
+				$scope.flipCard = function (which) {
+					// grab the card element we want to flip
+					var element = $('#card-'+this.$parent.$id);
+
+					// set animation speed and timing function and also start the flip
+					element.addClass('flip');
+
+					// start interval for the initial flip durration
+					var flipped = false;
+					// set up the flip timer
+					$interval(function () {
+						// half way through the flip
+						if (!flipped) {
+							// change color of the card
+							element.isolateScope().changeColor();
+							flipped = true;
+						}
+						else {
+							// remove flip class now that we've finished the full flip
+							element.removeClass('flip');
+							// call the space drop to reset the background color
+							element.parent().trigger('ngDrop', [element]);
+						}
+					}, 325, 2);
+				};
 
 				// transfer the data into the card object to the controller to be used in the template
 				$scope.changeCard($scope.which);

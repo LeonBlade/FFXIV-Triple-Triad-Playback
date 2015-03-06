@@ -6,7 +6,7 @@
 		<script src="js/lib/jquery-1.11.2.min.js"></script>
 		<script src="js/lib/angular.js"></script>
 		<script src="js/lib/ui-bootstrap-tpls-0.12.1.min.js"></script>
-		<script src="js/nsDrag.js"></script>
+		<script src="js/ngDrag.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/card.js"></script>
 		<script src="js/deck.js"></script>
@@ -14,15 +14,22 @@
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 
-	<body ng-controller="AppController">
+	<body ng-controller="AppController as appCtrl">
 
-		<card which="75" thumb="true"></card>
+		<div id="table">
 
-		<deck cards="36,37,14,27,35" color="blue"></deck>
+			<card which="75" thumb="true"></card>
+			<card which="56" thumb="true"></card>
 
-		<board>
-			<space ng-drop ng-repeat="n in range(1, 9)"></space>
-		</board>
+			<deck cards="36,37,14,27,35" color="blue"></deck>
+
+			<board>
+				<space ng-drop ng-repeat="n in range(1, 9)"></space>
+			</board>
+
+			<deck cards="36,37,14,27,35" color="red"></deck>
+
+		</div>
 
 	</body>
 

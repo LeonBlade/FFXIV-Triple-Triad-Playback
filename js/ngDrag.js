@@ -1,14 +1,14 @@
 (function () {
 
 	// drag module
-	var nsDrag = angular.module('nsDrag', []);
+	var ngDrag = angular.module('ngDrag', []);
 
 	var prop = { props: ['dataTransfer'] };
 	jQuery.event.fixHooks.dragstart = prop;
 	jQuery.event.fixHooks.drop = prop;
 
 	// drag attribute binding dragstart to the element and making it draggable
-	nsDrag.directive('ngDrag', function () {
+	ngDrag.directive('ngDrag', function () {
 		return {
 			restrict: 'A',
 			link: function(scope, elem, attrs) {
@@ -25,7 +25,7 @@
 	});
 
 	// binds a drag stop to allow for draggable elements to be placed in the element
-	nsDrag.directive('ngDrop', function ($q) {
+	ngDrag.directive('ngDrop', function ($q) {
 		return {
 			rectrict: 'A',
 			link: function (scope, elem, attrs) {
@@ -50,7 +50,7 @@
 					var dropElem = angular.element(event.target);
 
 					// create the trigger and check to see if it returns true
-					var trigger = dropElem.triggerHandler('nsDrop', [dragElem]);
+					var trigger = dropElem.trigger('ngDrop', [dragElem]);
 					if (trigger === undefined || trigger) {
 						event.target.appendChild(dragElem);
 					}

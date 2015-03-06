@@ -1,8 +1,10 @@
 (function () {
 
-	var app = angular.module('app', ['card', 'deck', 'nsDrag']);
+	var app = angular.module('app', ['card', 'deck', 'ngDrag']);
 
 	app.controller('AppController', ['$scope', function ($scope) {
+
+		$scope.flipId = "#card-17";
 
 		$scope.range = function (x, y) {
 			var a = [];
@@ -13,8 +15,11 @@
 			return a;
 		};
 
-		$scope.randomArr = null;
+		$scope.flip = function (selector) {
+			$(selector).isolateScope().flipCard();
+		};
 
+		$scope.randomArr = null;
 		$scope.random = function (count, max) {
 			if (!$scope.randomArr) {
 				var a = new Array(count);
@@ -24,6 +29,23 @@
 			}
 			return $scope.randomArr;
 		};
+
+		// space drop function
+		$('board').on('ngDrop', 'space', function (event, elem) {
+			$(elem).parent().removeClass('blue').removeClass('red');
+			// make sure this is a card
+			if ($(elem).is('card')) {
+				var color = $(elem).attr('color');
+				$(this).removeClass('blue').removeClass('red').addClass(color);
+				return true;
+			}
+			return false;
+		});
+
+		$('body').on('dblclick', 'card', function (event) {
+			var card = $(event.target).parent();
+			card.isolateScope().flipCard();
+		});
 
 	}]);
 

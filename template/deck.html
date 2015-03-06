@@ -1,7 +1,7 @@
 <div class="deck">
 
 	<space ng-repeat="card in deck.cards track by $id(card)">
-		<card id="{{ $id }}" which="{{ card }}" color="{{ deck.color }}" ng-drag></card>
+		<card id="card-{{ $id }}" which="{{ card }}" color="{{ deck.color }}" ng-drag></card>
 	</space>
 
 </div>
