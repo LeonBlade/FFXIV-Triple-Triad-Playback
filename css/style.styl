@@ -49,170 +49,56 @@ filter(args)
 
 body
 	background-color #555
-	board
-		width 518px
-		height 556px
-		padding 74px 55px
+	triad-table
 		display flex
-		flex-flow row wrap
-		position relative
-		&:after
-			  content ""
-			  width inherit
-			  background url('/images/ui/board-frame.png') no-repeat
-			  position: absolute
-			  left 0
-			  top 0
-			  bottom 0
-			  pointer-events none
-		space
-			display flex
+		align-content center
+		align-items center
+		justify-content center
+		margin-top 50px
+		board
+			width 518px
+			height 556px
+			padding 74px 55px
+			display inline-flex
+			flex-flow row wrap
 			position relative
-			background url('/images/ui/space.png')
-			width 136px
-			height 136px
-			&:before
-				content ""
-				position absolute
-				top 0
-				left 0
-				right 0
-				bottom 0
-			&:nth-child(odd):before
-					background rgba(0, 0, 0, 0.15)
-			&.blue:before
-					background rgba(0, 0, 255, 0.15)
-			&.red:before
-					background rgba(255, 0, 0, 0.15)
-	deck
-		space
-			position relative
-			width 104px
-			height 128px
-			display inline-block
-	card
-		margin auto
-		display inline-block
-		&:not([thumb])
-			width 104px
-			height 128px
-			transform-style preserve-3d
-			backface-visibility hidden
 			&:after
-				display none
-				content ""
-				background url('/images/ui/card back.png')
-				position absolute
-				top 0 
-				left 0 
-				right 0
-				bottom 0
-				transform rotateY(180deg)
-				transform-style preserve-3d
-				backface-visibility hidden
-			&.flip
-				animation cardflip 0.65s linear
-				-webkit-animation cardflip 0.65s linear
-				&:after
-					display block
-		.card
-			position relative
-			display inline-block
-			width 100%
-			height 100%
-			img
-				position absolute
-				&.star
-					top 6px
-					left 9px
-				&.type
-					top 3px
-					right 4px
-				&.card-top
-					bottom 26px
-					left 44px
-				&.card-left
-					bottom 19px
-					left 32px
-				&.card-bottom
-					bottom 12px
-					left 44px
-				&.card-right
-					bottom 19px
-					right 33px
-		&[thumb]
-			width 40px
-			height 40px
-			margin 5px
-		.cardThumb
-			position relative
-			display inline-block
-			width 100%
-			height 100%
-			div.effects
-				position absolute
-				width 48px
-				height 48px
-				top -3px
-				left -3px
-				background-image url('/images/ui/icona_frame.png')
-			div.overlay
-				div.numbers
-					opacity 0
-				img
+				  content ""
+				  width inherit
+				  background url('/images/ui/board-frame.png') no-repeat
+				  position: absolute
+				  left 0
+				  top 0
+				  bottom 0
+				  pointer-events none
+			space
+				display flex
+				position relative
+				background url('/images/ui/space.png')
+				width 136px
+				height 136px
+				&:before
+					content ""
 					position absolute
-					&.star
-						opacity 0
-						top 7px
-						left 6px
-					&.type
-						opacity 0
-						top 10px
-						right 10px
-					&.card-top
-						top 0
-						left 13px
-					&.card-bottom
-						bottom 0
-						left 13px
-					&.card-left
-						top 14px
-						left 0
-					&.card-right
-						top 14px
-						right 0
-			&:hover
-				div.effects
-					background-position 47px 0px
-				div.overlay
-					display block
-					position absolute
-					width 100%
-					height 100%
 					top 0
 					left 0
-					div.numbers
-						-webkit-animation thumbHoverFaces 4.5s
-						-webkit-animation-iteration-count infinite
-						animation thumbHoverFaces 4.5s
-						animation-iteration-count infinite
-					img.star
-						-webkit-animation thumbHoverRarity 4.5s
-						-webkit-animation-iteration-count infinite
-						animation thumbHoverFaces 4.5s
-						animation-iteration-count infinite
-					img.type
-						-webkit-animation thumbHoverType 4.5s
-						-webkit-animation-iteration-count infinite
-						animation thumbHoverFaces 4.5s
-						animation-iteration-count infinite
-	#board
-		display inline-block
-		.row
-			.space
+					right 0
+					bottom 0
+				&:nth-child(odd):before
+						background rgba(0, 0, 0, 0.15)
+				&.blue:before
+						background rgba(0, 0, 255, 0.15)
+				&.red:before
+						background rgba(255, 0, 0, 0.15)
+		deck
+			display inline-block
+			.deck
+				display flex
+				flex-flow row wrap
+				justify-content center
+				width 312px
+			space
+				position relative
+				width 104px
+				height 128px
 				display inline-block
-				background #CCC
-				width 140px
-				height 140px
-				.card
-					vertical-align()

@@ -3,9 +3,7 @@
 	var app = angular.module('app', ['card', 'deck', 'ngDrag']);
 
 	app.controller('AppController', ['$scope', function ($scope) {
-
-		$scope.flipId = "#card-17";
-
+		
 		$scope.range = function (x, y) {
 			var a = [];
 			if (!y)
@@ -24,7 +22,7 @@
 			if (!$scope.randomArr) {
 				var a = new Array(count);
 				for (var i = 0; i < count; i++) 
-					a[i] = Math.floor(Math.random() * 80 + 1);
+					a[i] = Math.floor(Math.random() * max + 1);
 				$scope.randomArr = a;
 			}
 			return $scope.randomArr;
@@ -43,7 +41,7 @@
 		});
 
 		$('body').on('dblclick', 'card', function (event) {
-			var card = $(event.target).parent();
+			var card = $(event.target);
 			card.isolateScope().flipCard();
 		});
 

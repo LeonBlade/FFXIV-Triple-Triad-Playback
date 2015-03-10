@@ -1,15 +1,11 @@
-<div class="card">
+<img class="back" ng-src="images/back/{{ color }}.png" />
 
-	<img class="back" ng-src="images/back/{{ color }}.png" />
+<img class="face" ng-src="images/cards/{{ card.id }}.png" />
 
-	<img class="face" ng-src="images/cards/{{ card.id }}.png" />
+<img class="star" ng-src="images/stars/{{ card.rarity }}.png" />
+<img class="type" ng-src="images/type/{{ card.type }}.png" ng-hide="card.type == 0" type="{{card.type}}" />
 
-	<img class="star" ng-src="images/stars/{{ card.rarity }}.png" />
-	<img class="type" ng-src="images/type/{{ card.type }}.png" ng-hide="card.type == 0" type="{{card.type}}" />
-
-	<img class="card-top" ng-src="images/numbers/{{ card.top }}.png" />
-	<img class="card-right" ng-src="images/numbers/{{ card.right }}.png" />
-	<img class="card-bottom" ng-src="images/numbers/{{ card.bottom }}.png" />
-	<img class="card-left" ng-src="images/numbers/{{ card.left }}.png" />
-
-</div>
+<img class="card-top" ng-src="images/numbers/{{ card.top }}.png" />
+<img class="card-right" ng-src="images/numbers/{{ card.right }}.png" />
+<img class="card-bottom" ng-src="images/numbers/{{ card.bottom }}.png" />
+<img class="card-left" ng-src="images/numbers/{{ card.left }}.png" />

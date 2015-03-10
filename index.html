@@ -12,24 +12,24 @@
 		<script src="js/deck.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/card.css" />
 	</head>
 
 	<body ng-controller="AppController as appCtrl">
 
-		<div id="table">
+		<card thumb="true" which="75"></card>
 
-			<card which="75" thumb="true"></card>
-			<card which="56" thumb="true"></card>
+		<triad-table>
 
 			<deck cards="36,37,14,27,35" color="blue"></deck>
 
 			<board>
-				<space ng-drop ng-repeat="n in range(1, 9)"></space>
+				<space ng-drop ng-repeat="n in range(9)"></space>
 			</board>
 
-			<deck cards="36,37,14,27,35" color="red"></deck>
+			<deck cards="32,47,24,7,15" color="red"></deck>
 
-		</div>
+		</triad-table>
 
 	</body>
 
