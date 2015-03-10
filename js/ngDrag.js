@@ -52,7 +52,8 @@
 					// create the trigger and check to see if it returns true
 					var trigger = dropElem.trigger('ngDrop', [dragElem]);
 					if (trigger === undefined || trigger) {
-						event.target.appendChild(dragElem);
+						elem.append(dragElem);
+						dropElem.trigger('ngPostDrop', [dragElem]);
 					}
 				});
 			}

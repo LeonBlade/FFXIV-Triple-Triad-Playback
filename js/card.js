@@ -1,6 +1,6 @@
 (function () {
 
-	var card = angular.module('card', ['ui.bootstrap']);
+	var card = angular.module('card', []);
 
 	card.directive('card', function () {
 		return {
@@ -39,12 +39,20 @@
 				};
 
 				// flip card
-				$scope.flipCard = function (which) {
+				$scope.flipCard = function (axis, color) {
 					// grab the card element we want to flip
 					var element = $('#card-'+this.$parent.$id);
 
+					// test to see if it's already the color we are flipping to if a color is passed in
+					if (color && element.attr('color') == color)
+						return false; // return false we didn't change
+
+					// proper flip class
+					var flipClass = "flip" + axis.toUpperCase();
+					console.log("flip class", flipClass);
+
 					// set animation speed and timing function and also start the flip
-					element.addClass('flip');
+					element.addClass(flipClass);
 
 					// start interval for the initial flip durration
 					var flipped = false;
@@ -58,19 +66,19 @@
 						}
 						else {
 							// remove flip class now that we've finished the full flip
-							element.removeClass('flip');
+							element.removeClass(flipClass);
 							// call the space drop to reset the background color
 							element.parent().trigger('ngDrop', [element]);
 						}
 					}, 325, 2);
+
+					// return true that we did change
+					return true;
 				};
 
 				// transfer the data into the card object to the controller to be used in the template
 				$scope.changeCard($scope.which);
 			}],
-			link: function (scope, elem, attrs) {
-				
-			},
 			controllerAs: "card",
 		};
 	});

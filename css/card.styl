@@ -1,7 +1,49 @@
+@keyframes cardflipX
+	0%
+		transform rotateX(0deg) scale3d(1, 1, 1)
+	50%
+		transform rotateX(180deg) scale3d(1.1, 1.1, 1)
+	100%
+		transform rotateX(360deg) scale3d(1, 1, 1)
+
+@keyframes cardflipY
+	0%
+		transform rotateY(0deg) scale3d(1, 1, 1)
+	50%
+		transform rotateY(180deg) scale3d(1.1, 1.1, 1)
+	100%
+		transform rotateY(360deg) scale3d(1, 1, 1)
+
+@keyframes thumbHoverFaces
+	0%
+	33%
+		opacity 1
+	34%
+	100%
+		opacity 0
+@keyframes thumbHoverRarity
+	0%
+	33%
+	67%
+	100%
+		opacity 0
+	34%
+	66%
+		opacity 1
+@keyframes thumbHoverType
+	0%
+	33%
+	66%
+		opacity 0
+	67%
+	100%
+		opacity 1
+
 card
 	margin auto
 	display inline-block
 	position relative
+	z-index 1
 	&:not([thumb])
 		width 104px
 		height 128px
@@ -19,9 +61,14 @@ card
 			transform rotateY(180deg)
 			transform-style preserve-3d
 			backface-visibility hidden
-		&.flip
-			animation cardflip 0.65s linear
-			-webkit-animation cardflip 0.65s linear
+		&.flipX
+			animation cardflipX 0.5s linear
+			-webkit-animation cardflipX 0.5s linear
+			&:after
+				display block
+		&.flipY
+			animation cardflipY 0.5s linear
+			-webkit-animation cardflipY 0.5s linear
 			&:after
 				display block
 	img
