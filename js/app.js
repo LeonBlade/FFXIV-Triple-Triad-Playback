@@ -60,7 +60,6 @@
 
 		// flip cards of adjacent cards to the card passed in
 		function flipCards(card, combo) {
-			console.log('flip');
 			// card color
 			var color = $(card).attr('color');
 			// get the space of this card
@@ -87,6 +86,12 @@
 			var bottom_card = bottom && $('card', bottom).length && $('card', bottom) || null;
 			var right_card = right && $('card', right).length && $('card', right) || null;
 
+			// get colors to make checking for various rules more efficient
+			var top_color = top_card && top_card.attr('color') || null;
+			var left_color = left_card && left_card.attr('color') || null;
+			var bottom_color = bottom_card && bottom_card.attr('color') || null;
+			var right_color = right_card && right_card.attr('color') || null;
+
 			// get adjacent card numbers
 			var top_value = (top_card) ? top_card.isolateScope().card.bottom : 0;
 			var left_value = (left_card) ? left_card.isolateScope().card.right : 0;
@@ -95,6 +100,8 @@
 
 			// an or statement that will return if there's more than one card adjacent
 			var cardExist = top_value || left_value || bottom_value || right_value;
+			// cards different from current color
+			var cardsSame = color == top_color || color == left_color || color == bottom_color || color == right_color;
 
 			// calculate individual outcomes and account for potential rules
 			// RULES
@@ -102,7 +109,8 @@
 			var plus = true;
 
 			// SAME RULE
-			if (same && cardExist) {
+			if (same && cardExist && !cardsSame && !combo) {
+
 				// keep track of how many same matches
 				var count = 0;
 				// calculate matches
@@ -127,7 +135,7 @@
 			}
 
 			// PLUS RULE
-			if (plus && cardExist && false) {
+			if (plus && cardExist && !cardsSame && !combo) {
 				// calculate sums
 				var sums = {};
 				sums.top = top_card && parseInt(card_obj.top) + parseInt(top_value) || 0;
@@ -135,18 +143,26 @@
 				sums.bottom = bottom_card && parseInt(card_obj.bottom) + parseInt(bottom_value) || 0;
 				sums.right = right_card && parseInt(card_obj.right) + parseInt(right_value) || 0;
 
+				// get keys array and sort it
 				var keys = Object.keys(sums).sort(function (a, b) { return sums[a] - sums[b] });
 
+				// matches array
 				var matches = [];
+				// last sum checked
 				var lastSum = 0;
+				// loop over the faces
 				for (key in keys) {
 					var i = keys[key];
 					var j = matches.length - 1;
-					if (sums[i] && sums[i] == lastSum)
+					// push this face into the matches
+					if (sums[i] && sums[i] == lastSum) {
 						matches[j].which.push(i);
+					}
+					// not matching push new sum match
 					else {
-						sums[i] && matches.push({ sum: sums[i], which: [i] });
+						// remove previous match if not enough matches
 						matches[j] && matches[j].which.length < 2 && matches.pop();
+						sums[i] && matches.push({ sum: sums[i], which: [i] });
 					}
 					lastSum = sums[i];
 				}
@@ -154,6 +170,24 @@
 				j = matches.length - 1;
 				matches[j] && matches[j].which.length < 2 && matches.pop();
 
+				// monitor changes in cards
+				var top_change, left_change, bottom_change, right_change;
+
+				// loop over matches
+				for (i in matches) {
+					// loop over the matched sides
+					for (j in matches[i].which) {
+						// get key value
+						var k = matches[i].which[j];
+						// flip the cards
+						top_change |= k == "top" && top_card.isolateScope().flipCard("x", color);
+						left_change |= k == "left" && left_card.isolateScope().flipCard("y", color);
+						bottom_change |= k == "bottom" && bottom_card.isolateScope().flipCard("x", color);
+						right_change |= k == "right" && right_card.isolateScope().flipCard("y", color);
+					}
+				}
+
+				// trigger combo
 				setTimeout(function () {
 					top_change && flipCards(top_card, true);
 					left_change && flipCards(left_card, true);

@@ -49,10 +49,10 @@
 
 					// proper flip class
 					var flipClass = "flip" + axis.toUpperCase();
-					console.log("flip class", flipClass);
 
 					// set animation speed and timing function and also start the flip
 					element.addClass(flipClass);
+					element.isolateScope().changeColor();
 
 					// start interval for the initial flip durration
 					var flipped = false;
@@ -61,7 +61,7 @@
 						// half way through the flip
 						if (!flipped) {
 							// change color of the card
-							element.isolateScope().changeColor();
+							//element.isolateScope().changeColor();
 							flipped = true;
 						}
 						else {
